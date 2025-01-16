@@ -5,6 +5,7 @@ function Home() {
   return (
     <>
       <Menu />
+      <p>Alterando pelo github</p>
       <h1 className="font-medium text-[20px] ml-6 mt-6">Home</h1>
     </>
   )
