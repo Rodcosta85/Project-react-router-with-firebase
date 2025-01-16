@@ -1,16 +1,10 @@
 {
   "users": [
     {
-      "id": "6f8a",
-      "name": "Maria",
-      "email": "maria@mail.com",
-      "password": "54321"
-    },
-    {
-      "id": "5c8b",
-      "name": "Rodrigo Costa",
-      "email": "rodrigo@mail.com",
-      "password": "5678"
+      "name": "Rodrigo Carvalho Costa",
+      "email": "r.costa08@gmail.com",
+      "password": "5678",
+      "id": "5c8b"
     }
   ]
 }
