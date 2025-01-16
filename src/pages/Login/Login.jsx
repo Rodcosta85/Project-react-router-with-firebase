@@ -10,9 +10,14 @@ function Login() {
   const navigate = useNavigate(); // React Router's navigation hook
 
   const getUsers = async () => {
-    const response = await fetch("http://localhost:3000/users");
+    try {
+      const response = await fetch("http://localhost:3000/users");
     const data = await response.json();
     setUsers(data);
+    } catch (error) {
+      console.log('failed to fetch the database', error);
+    }
+    
   }
 
   const handleSubmit = (e) => {
