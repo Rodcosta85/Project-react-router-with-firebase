@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Menu from "../../components/Menu/Menu.jsx";
 
 function UpdateInfo() {
   const navigate = useNavigate();
+  const [id, setId] = useState("");
   const [info, setInfo] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const patchInfo = async (id, name, email, password) => {
+  const patchInfo = async () => {
     try {
       const response = await fetch(`http://localhost:3000/users/${id}`, {
         method: "PUT",
@@ -33,12 +34,18 @@ function UpdateInfo() {
   };
 
   
-  const handleFormSubmit = (e, id) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    patchInfo(id, name, email, password);
+    patchInfo();
   };
 
-
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem("projeto-user"));
+    setId(user.id);
+    setName(user.name);
+    setEmail(user.email);
+    setPassword(user.password);
+  }, []);
 
   return (
     <>
@@ -55,6 +62,7 @@ function UpdateInfo() {
           id="name"
           className="w-[290px] mb-7 pb-2 border-black border-b-[1px] focus:outline-none"
           onChange={(e) => setName(e.target.value)}
+          value={name}
         />
         <div>
           <label htmlFor="email">Email</label>
@@ -65,6 +73,7 @@ function UpdateInfo() {
           id="email"
           className="w-[290px] mb-7 pb-2 border-black border-b-[1px] focus:outline-none"
           onChange={(e) => setEmail(e.target.value)}
+          value={email}
         />
         <div>
           <label htmlFor="password">Password</label>
@@ -75,6 +84,7 @@ function UpdateInfo() {
           id="password"
           className="w-[290px] mb-10 pb-2 border-black border-b-[1px] focus:outline-none"
           onChange={(e) => setPassword(e.target.value)}
+          value={password}
         />
         <div className="flex pl-12">
           <button

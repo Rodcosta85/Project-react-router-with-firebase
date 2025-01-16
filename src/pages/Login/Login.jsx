@@ -23,6 +23,7 @@ function Login() {
       if (!user) {
         return false;
       }
+      sessionStorage.setItem("projeto-user", JSON.stringify(user));
       const isPasswordValid = user.password === password;
       return isPasswordValid;
     }

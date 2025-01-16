@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Menu from "../../components/Menu/Menu.jsx";
-import apifake from "../../../API fake/db.json";
 import Edit from "../../../public/edit.svg";
 import Delete from "../../../public/delete.svg";
 
 function Dashboard() {
   const [info, setInfo] = useState([]);
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate(); // React Router's navigation hook
 
   const handleRemove = async (id) => {
@@ -28,9 +28,25 @@ function Dashboard() {
     }
   };
 
+  const getUsers = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/users`);
+      const data = await response.json();
+
+      setUsers(data);
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong, please try again");
+    }
+  }
+
   const updateInfo = () => {
     navigate("/update+info");
   };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <>
@@ -45,7 +61,7 @@ function Dashboard() {
         </h2>
       </div>
       <div className="grid grid-cols-2 gap-14 mt-[50px]">
-        {apifake.users.map((user) => {
+        {users.map((user) => {
           return (
             <div
               key={user.id}
