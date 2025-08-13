@@ -3,50 +3,48 @@ import { useNavigate } from "react-router-dom";
 import Menu from "../../components/Menu/Menu.jsx";
 import Edit from "../../../public/edit.svg";
 import Delete from "../../../public/delete.svg";
+import { db } from "../../../firebase.js"
+import { collection, getDocs } from "firebase/firestore";
 
 function Dashboard() {
   const [info, setInfo] = useState([]);
   const [users, setUsers] = useState([]);
   const navigate = useNavigate(); // React Router's navigation hook
 
-  const handleRemove = async (id) => {
-    try {
-      await fetch(`http://localhost:3000/users/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }),
-      });
+  // const handleRemove = async (id) => {
+  //   try {
+  //     await fetch(`http://localhost:3000/users/${id}`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ id }),
+  //     });
       
-      setInfo(info.filter((user) => user.id !== id));
-      alert("user deleted from our database");
+  //     setInfo(info.filter((user) => user.id !== id));
+  //     alert("user deleted from our database");
     
-    } catch (error) {
-      console.log(error);
-      alert("Something went wrong, please try again");
-    }
-  };
+  //   } catch (error) {
+  //     console.log(error);
+  //     alert("Something went wrong, please try again");
+  //   }
+  // };
 
-  const getUsers = async () => {
-    try {
-      const response = await fetch(`http://localhost:3000/users`);
-      const data = await response.json();
-
+  
+  useEffect(() => {
+    async function fetchUsers() {
+      const snapshot = await getDocs(collection(db, "users"));
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setUsers(data);
-    } catch (error) {
-      console.log(error);
-      alert("Something went wrong, please try again");
     }
-  }
+    fetchUsers();
+  }, []);
 
   const updateInfo = () => {
     navigate("/update+info");
   };
 
-  useEffect(() => {
-    getUsers();
-  }, []);
+
 
   return (
     <>
@@ -97,5 +95,6 @@ function Dashboard() {
     </>
   );
 }
+
 
 export default Dashboard;

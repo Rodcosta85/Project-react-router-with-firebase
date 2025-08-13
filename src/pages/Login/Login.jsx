@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Menu from "../../components/Menu/Menu.jsx";
+import { auth, db } from "../../../firebase.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 // import users from "./users.json";
 
 function Login() {
@@ -9,11 +11,21 @@ function Login() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate(); // React Router's navigation hook
 
-  const getUsers = async () => {
-    const response = await fetch("http://localhost:3000/users");
-    const data = await response.json();
-    setUsers(data);
+  useEffect(() => {
+      async function handleLogin(email, password, navigate) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    // Login successful
+    sessionStorage.setItem("token", userCredential.user.uid); // Firebase UID as token
+    alert("Login successful!");
+    navigate("/dashboard");
+  } catch (error) {
+    alert("Invalid email or password.");
+    console.error(error);
   }
+}
+      handleLogin();
+    }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
