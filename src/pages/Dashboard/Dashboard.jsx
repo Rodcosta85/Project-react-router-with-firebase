@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Menu from "../../components/Menu/Menu.jsx";
 import Edit from "../../../public/edit.svg";
 import Delete from "../../../public/delete.svg";
-import { db } from "../../../firebase.js"
+import { db } from "../../services/firebase.js";
 import { collection, getDocs } from "firebase/firestore";
 
 function Dashboard() {

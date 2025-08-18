@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import useQuery from '../../services/useQuery.jsx';
 import Menu from "../../components/Menu/Menu.jsx";
 
 function Welcome() {
+
+  const [users, setUsers] = useState([]);
+
+  const { getData } = useQuery();
+
+  async function getUsers() {
+    const response = await getData("users");
+    console.log(response);
+  }
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
     <>
       <Menu />
