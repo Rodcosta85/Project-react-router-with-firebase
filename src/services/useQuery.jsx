@@ -15,14 +15,16 @@ function useQuery() { // nome da função é o mesmo do hook
     // resumindo, quando passamos db e col estamos mandando a firestore nos dar a referência dessa coleção.
     // O getDocs com collection dentro funcionam como uma promessa!!!
     // a nossa const snapshot retorna um objeto puxado pelo getDocs
-    const snapshot = await getDocs(collection(db, col)); 
-    
-  
+    const snapshot = await getDocs(collection(db, col));
+    snapshot.forEach((doc) => {
+      console.log(doc.id, doc.data()); // logs each document
+    });
+
 
     // snapshot.docs é um array, e cada elemento de dentro do array é um QuerySnapshotDocument que representa cada objeto de dentro da nossa firebase
     // Lembrando que cada usuário é um objeto com as suas chaves e valores dentro dele. user1 é um, user2 é outro, e assim em diante
     // ai como ele está acessando os objetos, ele mapeia as infos (item) dos objetos para podermos usá-las:::
-      // map(...) is used to transform each document snapshot into a plain JavaScript object with its id and data.
+    // map(...) is used to transform each document snapshot into a plain JavaScript object with its id and data.
     const docs = snapshot.docs.map(item => ({ id: item.id, ...item.data() }));
 
 
@@ -34,25 +36,25 @@ function useQuery() { // nome da função é o mesmo do hook
 
 export default useQuery;
 
-// The hook returns an object containing the getData function, 
-// allowing components that use this hook to call getData and retrieve Firestore data as needed. 
-// Finally, useQuery is exported as the default export, so it can be 
+// The hook returns an object containing the getData function,
+// allowing components that use this hook to call getData and retrieve Firestore data as needed.
+// Finally, useQuery is exported as the default export, so it can be
 // easily imported and used in other parts of your application.
 
 
-// para DELETAR documentos: 
+// para DELETAR documentos:
 
-    // import { deleteDoc, doc } from "firebase/firestore";
-    // import { db } from "./firebase.js";
-    // await deleteDoc(doc(db, "collectionName", "documentId"));
+// import { deleteDoc, doc } from "firebase/firestore";
+// import { db } from "./firebase.js";
+// await deleteDoc(doc(db, "collectionName", "documentId"));
 
 
 // para ATUALIZAR documentos:
 
-    // import { updateDoc, doc } from "firebase/firestore";
-    // import { db } from "./firebase.js";
+// import { updateDoc, doc } from "firebase/firestore";
+// import { db } from "./firebase.js";
 
-  //   await updateDoc(
-  // doc(db, "collectionName", "documentId"), // reference to the document
-  // { keyToUpdate: "newValue" }              // object with the fields to update
-  // }; 
+//   await updateDoc(
+// doc(db, "collectionName", "documentId"), // reference to the document
+// { keyToUpdate: "newValue" }              // object with the fields to update
+// }; 

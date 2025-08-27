@@ -5,13 +5,13 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY, // chave de API igual é feito em uma chamada de qualquer API, mas é o firebase em si
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY, // chave de API igual é feito em uma chamada de qualquer API, mas é o firebase em si
   authDomain: "some-users-db.firebaseapp.com",
   projectId: "some-users-db",
   storageBucket: "some-users-db.firebasestorage.app",
   messagingSenderId: "703194179021",
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 
@@ -28,7 +28,6 @@ const app = initializeApp(firebaseConfig);
 // Nos permite acessar a database (db) que foi criada dentro do firebase
 // Contém as ids e a chave, como destacado anteriormente no firebaseConfig
 const db = getFirestore(app);
-
 
 
 

@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 }
 
 function Menu() {
-  //   const navigate = useNavigate();
+  
 
   return (
     <div className="w-[100vw] h-16 pl-2 bg-blue-500 flex flex-row items-center justify-center">
@@ -14,21 +14,21 @@ function Menu() {
         <li className="mr-7 font-semibold hover:text-white">
           <Link to="/">Welcome</Link>
         </li>
-        <li className="mr-7 font-semibold hover:text-white">
+        {/* <li className="mr-7 font-semibold hover:text-white">
           <Link to="/home">Home</Link>
-        </li>
+        </li> */}
         <li className="mr-7 font-semibold hover:text-white">
           <Link to="/signup">Sign up</Link>
         </li>
         <li className="mr-7 font-semibold hover:text-white">
           <Link to="/login">Login</Link>
         </li>
-        <li className="mr-7 font-semibold hover:text-white">
+        {/* <li className="mr-7 font-semibold hover:text-white">
           <Link to="/dashboard">Dashboard</Link>
         </li>
         <li className="mr-7 font-semibold hover:text-white">
           <Link to="/update+info">Update your info</Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
