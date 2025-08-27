@@ -5,13 +5,13 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAFzyDgEJ2QunnJKMbySfgR_zL88KSc-D0", // chave de API igual é feito em uma chamada de qualquer API, mas é o firebase em si
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY, // chave de API igual é feito em uma chamada de qualquer API, mas é o firebase em si
   authDomain: "some-users-db.firebaseapp.com",
   projectId: "some-users-db",
   storageBucket: "some-users-db.firebasestorage.app",
   messagingSenderId: "703194179021",
-  appId: "1:703194179021:web:02ebc3c3c85a4a633a9084",
-  measurementId: "G-1D3XPKTCPM"
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
 
